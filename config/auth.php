@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+            'expire' => 60, // Token will expire in 60 minutes
+        ],
+    
+        // ... other guards
     ],
 
     /*
