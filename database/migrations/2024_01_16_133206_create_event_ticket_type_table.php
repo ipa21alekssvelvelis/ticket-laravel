@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('soldtickets', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('ticket_id');
+            $table->unsignedBigInteger('event_id'); // Foreign key
+            $table->foreign('event_id')->references('id')->on('events');
+            $table->string('ticket_name');
+            $table->decimal('ticket_price', 8, 2);
             $table->integer('quantity');
-            $table->string('payment_intent_id');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('soldtickets');
+        Schema::dropIfExists('tickets');
     }
 };

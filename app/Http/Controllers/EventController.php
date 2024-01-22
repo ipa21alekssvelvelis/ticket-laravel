@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\EventType;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -15,14 +16,16 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
             'type' => 'required|exists:event_types,id',
             'date' => 'required|date',
-            'price' => 'required|numeric|min:0',
+            // 'price' => 'required|numeric|min:0',
             'place' => 'required',
             'image' => 'required|image|mimes:jpg,jpeg,png,gif',
+            'tickets' => 'required',
         ]);
     
         if ($validator->fails()) {
@@ -42,12 +45,12 @@ class EventController extends Controller
             'description' => $request->input('description'),
             'type' => $request->input('type'),
             'date' => $request->input('date'),
-            'price' => $request->input('price'),
+            // 'price' => $request->input('price'),
             'place' => $request->input('place'),
             'image_path' => $imageName,
         ]);
     
-        return response()->json(['message' => 'Event created'], 200);
+        return response()->json(['message' => 'Event created', 'event_id' => $event->id], 200);
     }
     
 
@@ -84,7 +87,7 @@ class EventController extends Controller
             'description' => 'required',
             'type' => 'required|exists:event_types,id',
             'date' => 'required|date',
-            'price' => 'required|numeric|min:0',
+            // 'price' => 'required|numeric|min:0',
             'place' => 'required',
             'image' => 'image|mimes:jpg,jpeg,png,gif',
         ]);
@@ -106,7 +109,7 @@ class EventController extends Controller
                 'description' => $request->input('description'),
                 'type' => $request->input('type'),
                 'date' => $request->input('date'),
-                'price' => $request->input('price'),
+                // 'price' => $request->input('price'),
                 'place' => $request->input('place'),
                 'image_path' => $imageName,
             ]);
@@ -116,7 +119,7 @@ class EventController extends Controller
                 'description' => $request->input('description'),
                 'type' => $request->input('type'),
                 'date' => $request->input('date'),
-                'price' => $request->input('price'),
+                // 'price' => $request->input('price'),
                 'place' => $request->input('place'),
             ]);
         }

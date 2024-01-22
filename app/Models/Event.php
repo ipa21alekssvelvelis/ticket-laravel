@@ -22,4 +22,9 @@ class Event extends Model
         return $this->hasMany(Reviews::class);
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
 }

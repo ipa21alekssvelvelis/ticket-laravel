@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('type'); // Foreign key
             $table->foreign('type')->references('id')->on('event_types');
             $table->datetime('date');
-            $table->decimal('price', 8, 2);
             $table->string('place');
             $table->string('image_path');
             $table->timestamps();

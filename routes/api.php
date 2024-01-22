@@ -37,3 +37,17 @@ use App\Http\Controllers\ReviewController;
 
 Route::post('/submit-review', [ReviewController::class, 'submitReview']);
 Route::get('/review-list-{id}', [ReviewController::class, 'getReviewsForEvent']);
+
+use App\Http\Controllers\TicketController;
+
+Route::post('/tickets-store', [TicketController::class, 'store']);
+Route::get('/ticket-list-{id}', [TicketController::class, 'getTicketsForEvent']);
+Route::put('/ticket-update-{id}', [TicketController::class, 'updateOrCreateTickets']);
+
+use App\Http\Controllers\StripeController;
+
+Route::post('/pay-for-ticket', [StripeController::class, 'handlePayment']);
+
+use App\Http\Controllers\SoldTicketsController;
+
+Route::get('/get-user-tickets-{id}', [SoldTicketsController::class, 'getPurchaseHistoryForUser']);
